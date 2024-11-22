@@ -21,7 +21,7 @@ class DataTransforms:
 
     @classmethod
     def load(cls, path):
-        scaler_dict = np.load(path / "scaler.npy", allow_pickle=True).item()
+        scaler_dict = np.load(path, allow_pickle=True).item()
         instance = cls()
         instance.scaler.mean_ = scaler_dict["mean_"]
         instance.scaler.scale_ = scaler_dict["scale_"]

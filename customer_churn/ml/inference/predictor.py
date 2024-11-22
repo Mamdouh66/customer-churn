@@ -27,6 +27,9 @@ class ChurnPredictor:
 
     @classmethod
     def load(cls, model_path: Path, transforms_path: Path, device: torch.device):
-        model = torch.load(model_path)
+        state_dict = torch.load(f=model_path)
+        model = ChurnModel(input_dim=state_dict["model.0.weight"].shape[1])
+        model = model.to(device)
+        model.load_state_dict(state_dict=state_dict)
         transforms = DataTransforms.load(transforms_path)
         return cls(model, transforms, device)

@@ -5,7 +5,7 @@ from pathlib import Path
 import torch
 import numpy as np
 
-from customer_churn.ml.configs import ModelConfigs
+from customer_churn.configs import ModelConfigs
 from customer_churn.ml.models.model import ChurnModel
 
 from sklearn.metrics import accuracy_score, roc_auc_score

@@ -8,7 +8,7 @@ import argparse
 from customer_churn.ml.data.dataset import ChurnDataset
 from customer_churn.ml.data.transforms import DataTransforms
 from customer_churn.ml.models.model import ChurnModel
-from customer_churn.ml.configs import ModelConfigs
+from customer_churn.configs import ModelConfigs
 from customer_churn.ml.training.trainer import ChurnTrainer
 from customer_churn.ml.training.utils import (
     plot_training_metrics,
@@ -117,7 +117,7 @@ def main():
     save_path.mkdir(exist_ok=True)
 
     torch.save(model.state_dict(), save_path / "model.pth")
-    # transforms.save(save_path)
+    transforms.save(save_path)
 
 
 if __name__ == "__main__":
