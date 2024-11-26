@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  web:
+    build:
+      context: .
+    container_name: churner
+    command:
+      [
+        "fastapi",
+        "run",
+        "customer_churn/api/server.py",
+        "--port",
+        "80",
+        "--workers",
+        "4",
+      ]
+    ports:
+      - "8567:80"
+    environment:
+      - PYTHONPATH=/app
+    develop:
+      watch:
+        - action: sync
+          path: ./customer_churn
+          target: /app/customer_churn
