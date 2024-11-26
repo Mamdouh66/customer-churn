@@ -19,7 +19,7 @@ mlxtend = "^0.23.3"
 wandb = "^0.18.7"
 pydantic = "^2.10.1"
 pydantic-settings = "^2.6.1"
-fastapi = "^0.115.5"
+fastapi = {extras = ["all"], version = "^0.115.5"}
 
 
 [build-system]

@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 from customer_churn.logger import get_logger
 from customer_churn.api.deps import ModelManager
+from customer_churn.api.ml.routes import router as ml_router
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,6 +40,8 @@ def get_application() -> FastAPI:
         allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         allow_headers=["*"],
     )
+
+    app.include_router(ml_router)
 
     return app
 

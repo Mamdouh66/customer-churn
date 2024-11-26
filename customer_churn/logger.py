@@ -20,6 +20,9 @@ def get_logger() -> logging.Logger:
 
     console = Console(theme=custom_theme)
 
+    log_dir = Path("logs")
+    log_dir.mkdir(exist_ok=True)
+
     logging_config: dict = {
         "version": 1,
         "disable_existing_loggers": False,
@@ -46,14 +49,16 @@ def get_logger() -> logging.Logger:
             },
             "info": {
                 "class": "logging.handlers.RotatingFileHandler",
-                "maxBytes": 10485760,  # 1 MB
+                "filename": "logs/info.log",
+                "maxBytes": 10485760,  # 10 MB
                 "backupCount": 10,
                 "formatter": "detailed",
                 "level": logging.INFO,
             },
             "error": {
                 "class": "logging.handlers.RotatingFileHandler",
-                "maxBytes": 10485760,  # 1 MB
+                "filename": "logs/error.log",
+                "maxBytes": 10485760,  # 10 MB
                 "backupCount": 10,
                 "formatter": "detailed",
                 "level": logging.ERROR,

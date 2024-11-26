@@ -4,14 +4,10 @@ import numpy as np
 from customer_churn.api.deps import get_predictor
 from customer_churn.ml.inference.predictor import ChurnPredictor
 from customer_churn.api.ml.schemas import CustomerData, PredictionResponse
+from customer_churn.ml.data.utils import prepare_features
 
 
 router = APIRouter(prefix="/model", tags=["MODEL"])
-
-
-def _prepare_features(customer: CustomerData):
-    # TODO: features transformation pipeline
-    ...
 
 
 @router.post("/predict", response_model=PredictionResponse)
@@ -28,8 +24,8 @@ async def get_prediction(
     Returns:
         Prediction response with churn probability and binary prediction
     """
-    features = _prepare_features(customer)
-    churn_prob = float(predictor.predict(features)[0])
+    features = prepare_features(customer).reshape(1, -1)
+    churn_prob = float(predictor.predict(features))
 
     return PredictionResponse(
         churn_probability=churn_prob, is_likely_to_churn=churn_prob > 0.5
